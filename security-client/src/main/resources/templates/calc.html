@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="/js/calc.js"></script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-4 offset-4">
+            <h2>Ingresa un numero para elevar al cuadrado</h2>
+            <form id="calcForm" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="number" placeholder="Numero para elevar" id="num">
+                </div>
+                <button id="calc" class="btn btn-outline-primary" type="submit">Elevar</button>
+            </form>
+            <h3 id="result" style="display: none"></h3>
+        </div>
+    </div>
+
+</body>
+
+
+</html>
