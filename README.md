@@ -31,7 +31,7 @@ java -jar target\security-0.0.1-SNAPSHOT.jar
 ```
 
 ## Probar
-1. Debe cargar el certificado que se encuentra en al browser para acceder al servicio cliente, si no sabe como este [tutorial](https://support.globalsign.com/customer/es/portal/articles/1211541-instalar-certificado-digital-del-cliente---windows-usando-chrome)
+1. Debe cargar el certificado que se encuentra [aqui](https://github.com/Santiago-Rocha/AREM-Security/blob/master/nt-ms.p12) en al browser para acceder al servicio cliente, si no sabe como este [tutorial](https://support.globalsign.com/customer/es/portal/articles/1211541-instalar-certificado-digital-del-cliente---windows-usando-chrome)
 2. Acceda al servicio cliente en la siguiente url https://localhost:9001
 3. Al entrar por primera vez debera confirmar que desea utilizar el certificado que cargó en el paso 1
 ![c1](https://user-images.githubusercontent.com/13685178/67454525-0ec10e00-f5f0-11e9-8f26-b16a8ab5c649.PNG)
@@ -41,6 +41,7 @@ java -jar target\security-0.0.1-SNAPSHOT.jar
 ![image](https://user-images.githubusercontent.com/13685178/67455040-e6d2aa00-f5f1-11e9-8fa9-3ce4c8fb3fc8.png)
 
 5. Una vez dentro de la aplicacíon puede introducir un numero, este será elevado al cuadrado (dicha operacion es realizada por el otro servicio)
+\
 ![image](https://user-images.githubusercontent.com/13685178/67455085-0bc71d00-f5f2-11e9-9788-501ecde4cab4.png)
 
 
