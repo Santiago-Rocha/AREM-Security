@@ -25,13 +25,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-	        .antMatchers(resources).permitAll()  
+	        .antMatchers(resources).permitAll()  //recursos permitidios 
             .antMatchers("/","/index").permitAll()
-            .antMatchers("/calc").access("hasRole('ADMIN')")
+            .antMatchers("/calc").access("hasRole('ADMIN')") //recurso solo accesible por un usuario ADMIN
                 .anyRequest().authenticated()
                 .and()
-            .formLogin()
-                .loginPage("/login")
+            .formLogin() //configuracion de login
+                .loginPage("/login") 
                 .permitAll()
                 .defaultSuccessUrl("/calc")
                 .failureUrl("/index?error=true")
@@ -43,8 +43,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .logoutSuccessUrl("/login?logout")
                 .and().csrf().disable();
     }
+
+
     BCryptPasswordEncoder bCryptPasswordEncoder;
-    //Crea el encriptador de contraseñas	
+    /**
+     * Este metodo crea el encriptor de contraseñas que usa BCrypt como funcion de hash
+     * @return un ecriptor de contraseñas 
+     */	
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
 		bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
@@ -53,7 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
     @Autowired
     UserDetailsServiceImpl userDetailsService;
-	
+    
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { 
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());     

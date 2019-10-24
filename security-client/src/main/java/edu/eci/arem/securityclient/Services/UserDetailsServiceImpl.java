@@ -15,25 +15,32 @@ import org.springframework.stereotype.Service;
 import edu.eci.arem.securityclient.Entities.Authority;
 import edu.eci.arem.securityclient.Repositories.UserRepository;
 
+/**
+ * @author Santiago Rocha - ECI
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
-	
+
     @Override
-     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-     edu.eci.arem.securityclient.Entities.User appUser = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("No existe usuario"));
-		
-    List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
-    for (Authority authority: appUser.getAuthority()) {
-        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority.getAuthority());
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        //Buscar el usuario con el repositorio y si no existe lanzar una exepcion
+        edu.eci.arem.securityclient.Entities.User appUser = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("No existe usuario"));
+
+        List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+
+        //Mapear nuestra lista de Authority con la de spring security 
+        for (Authority authority : appUser.getAuthority()) {
+            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority.getAuthority());
             grantList.add(grantedAuthority);
-    }
-		
-    //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
-    UserDetails user = (UserDetails) new User(appUser.getUsername(), appUser.getPassword(), grantList);
-         return user;
+        }
+
+        //Mapear nuestra lista de Authority con la de spring security 
+        UserDetails user = (UserDetails) new User(appUser.getUsername(), appUser.getPassword(), grantList);
+        return user;
     }
 }

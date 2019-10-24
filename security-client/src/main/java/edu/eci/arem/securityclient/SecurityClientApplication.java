@@ -24,21 +24,28 @@ public class SecurityClientApplication {
 		SpringApplication.run(SecurityClientApplication.class, args);
 	}
 
+	/**
+	 * Este metodo se encarga de establecer un cliente seguro para realizar peticiones a un servidor a traves de certificados SSL
+	 * @return Cliente http configurado con ssl para acer peticiones sincronaz
+	 */
 	@Bean
 	public RestTemplate getRestTemplate(){
 		RestTemplate restTemplate =  new RestTemplate();
 		KeyStore keyStore;
 		HttpComponentsClientHttpRequestFactory requestFactory =  null;
 		try{
+			//almacena el certificado
 			keyStore = KeyStore.getInstance("jks");
 			ClassPathResource classPathResource = new ClassPathResource("nt-gateway.jks");
 			InputStream inputStream = classPathResource.getInputStream();
 			keyStore.load(inputStream, "Thruman98".toCharArray());
 
+			//configura el certificado ssl que se va a intercambiar
 			SSLConnectionSocketFactory socketFactory =  new SSLConnectionSocketFactory(
 				new SSLContextBuilder().loadTrustMaterial(null, new TrustSelfSignedStrategy())
 				.loadKeyMaterial(keyStore, "Thruman98".toCharArray()).build(),NoopHostnameVerifier.INSTANCE);
 			
+			//configura el cliente con el certificado 
 			HttpClient httpClient = HttpClients.custom().setSSLSocketFactory(socketFactory)
 						.setMaxConnTotal(Integer.valueOf(5))
 						.setMaxConnPerRoute(Integer.valueOf(5))
